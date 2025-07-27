@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal } from "antd";
 
 const Popups = ({ title, open, onCancel, children, ...rest }) => {

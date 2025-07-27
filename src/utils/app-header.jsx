@@ -1,4 +1,3 @@
-import React from "react";
 import { Layout, Avatar } from "antd";
 import { AiOutlineLogout } from "react-icons/ai";
 
