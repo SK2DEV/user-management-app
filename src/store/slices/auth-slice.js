@@ -2,22 +2,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { loginService } from '../../service/login-service';
 import { clearToken, getToken, saveToken } from '../../helpers/local-storage';
 
-// ✅ Updated saveToken to accept rememberMe flag
-// saveToken(token, remember) => stores in localStorage or sessionStorage
+
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ credentials, remember }, { rejectWithValue }) => {
     const { email, password } = credentials;
 
-    // Custom validation logic (mock)
     if (email !== "eve.holt@reqres.in" || password !== "cityslicka") {
       return rejectWithValue("Invalid email or password");
     }
 
     try {
-      const response = await loginService(credentials); // { token, user }
-      saveToken(response.token, remember); // ✅ Remember-based storage
+      const response = await loginService(credentials); 
+      saveToken(response.token, remember); 
       return response;
     } catch (error) {
       return rejectWithValue(error?.response?.data?.message || 'Login failed');
@@ -28,7 +26,7 @@ export const loginUser = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    token: getToken() || null,  // ✅ Read from both storages
+    token: getToken() || null,  
     user: null,
     status: 'idle',
     error: null,
@@ -37,7 +35,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.token = null;
       state.user = null;
-      clearToken(); // ✅ Clears from both storages
+      clearToken(); 
     },
   },
   extraReducers: (builder) => {
