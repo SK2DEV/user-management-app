@@ -1,6 +1,7 @@
-html, body, #root {
-  height: 100%;
-  margin: 0;
+html,
+body,
+#root {
+  overflow-x: auto; 
 }
 
 .login-container {
@@ -20,13 +21,16 @@ html, body, #root {
 .login-item {
   margin-bottom: 10px !important;
 }
+
 .ant-card-head {
-  border-bottom: none !important; 
+  border-bottom: none !important;
 }
-.user-page{
+
+.user-page {
   background-color: #e5e5e5;
   padding: 10px 30px;
 }
+
 .user-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -35,16 +39,13 @@ html, body, #root {
 
 .user-card-wrapper {
   position: relative;
-  /* width: 240px; */
 }
 
 .user-card {
   width: 100%;
   text-align: center;
   overflow: hidden;
-  
 }
-
 
 .user-avatar {
   display: block;
@@ -53,8 +54,6 @@ html, body, #root {
   border: 3px solid #f0f0f0;
 }
 
-
-/* Full Overlay */
 .user-card-overlay {
   position: absolute;
   top: 0;
@@ -77,7 +76,7 @@ html, body, #root {
 .user-card .ant-card-cover > * {
   border-radius: 50%;
 }
-/* Icon Buttons */
+
 .icon-btn {
   width: 60px;
   height: 60px;
@@ -103,9 +102,136 @@ html, body, #root {
 .icon-btn:hover {
   transform: scale(1.2);
 }
+
 .pagination-container {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
   padding-right: 10px;
+}
+
+
+.app-header {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  height: 64px;
+  padding: 0 16px;
+  background: #001529;
+  color: #fff;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.app-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.app-username {
+  color: #fff;
+  font-size: 14px;
+}
+
+
+.logout-icon {
+  background-color: #ff4d4f; 
+  color: #fff; 
+  font-size: 20px; 
+  cursor: pointer;
+  width: 24px; 
+  height: 24px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.logout-icon:hover {
+  background-color: #ff7875; 
+}
+
+@media (max-width: 576px) {
+  .app-header {
+    justify-content: space-between; 
+  }
+
+  .app-title {
+    display: none; 
+  }
+
+  .app-user-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+  }
+
+  .app-username {
+    margin-right: auto;
+  }
+}
+
+.card-extra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-container {
+  flex: 1;
+}
+
+.desktop-btn {
+  display: block;
+}
+
+.mobile-btn {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .card-extra {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .filter-container {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .desktop-btn {
+    display: none; 
+  }
+
+  .mobile-btn {
+    display: block;
+  }
+}
+
+.app-container {
+  min-width: 768px; 
+  overflow-x: auto; 
+  min-height: 100vh; 
+  background-color: #f5f6fa;
+}
+
+.page-layout {
+  padding: 16px;
+}
+
+.page-card {
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .page-card .ant-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

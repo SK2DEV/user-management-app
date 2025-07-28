@@ -6,7 +6,6 @@ import {
   deleteUser,
 } from "../../service/user-service";
 
-// ✅ Fetch all users
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async (_, { rejectWithValue }) => {
@@ -24,7 +23,7 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-// ✅ Add user
+
 export const addUser = createAsyncThunk(
   "users/addUser",
   async (userData, { rejectWithValue }) => {
@@ -37,7 +36,7 @@ export const addUser = createAsyncThunk(
   }
 );
 
-// ✅ Edit user
+
 export const editUser = createAsyncThunk(
   "users/editUser",
   async ({ id, data }, { rejectWithValue }) => {
@@ -50,7 +49,6 @@ export const editUser = createAsyncThunk(
   }
 );
 
-// ✅ Remove user
 export const removeUser = createAsyncThunk(
   "users/removeUser",
   async (id, { rejectWithValue }) => {
@@ -63,17 +61,15 @@ export const removeUser = createAsyncThunk(
   }
 );
 
-// ✅ Slice
 const userSlice = createSlice({
   name: "users",
   initialState: {
     list: [],
     loading: false,
     error: null,
-    searchQuery: "", // ✅ Added search query state
+    searchQuery: "",
   },
   reducers: {
-    // ✅ Set search query
     setSearchQuery: (state, action) => {
       state.searchQuery = action.payload;
     },
@@ -93,20 +89,17 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ✅ Add user
       .addCase(addUser.fulfilled, (state, action) => {
         state.list.push(action.payload);
         localStorage.setItem("users", JSON.stringify(state.list));
       })
 
-      // ✅ Edit user
       .addCase(editUser.fulfilled, (state, action) => {
         const index = state.list.findIndex((u) => u.id === action.payload.id);
         if (index !== -1) state.list[index] = action.payload;
         localStorage.setItem("users", JSON.stringify(state.list));
       })
 
-      // ✅ Remove user
       .addCase(removeUser.fulfilled, (state, action) => {
         state.list = state.list.filter((u) => u.id !== action.payload);
         localStorage.setItem("users", JSON.stringify(state.list));
@@ -118,7 +111,6 @@ export const { setSearchQuery } = userSlice.actions;
 export const selectUsers = (state) => state.users.list;
 export const selectSearchQuery = (state) => state.users.searchQuery;
 
-// ✅ Selector for filtered users
 export const selectFilteredUsers = createSelector(
   [selectUsers, selectSearchQuery],
   (users, searchQuery) => {

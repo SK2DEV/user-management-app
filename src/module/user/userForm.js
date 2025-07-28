@@ -2,25 +2,24 @@ import React, { useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import Popups from "../../utils/popups";
 
-const UserForm = ({form,visible, onCancel,onSubmit,saving,editingUser }) => {
-    useEffect(() => {
-        if (visible) {
-          if (editingUser) {
-            form.setFieldsValue({
-              firstName: editingUser.first_name || "",
-              lastName: editingUser.last_name || "",
-              email: editingUser.email || "",
-              profileImage: editingUser.avatar || "",
-            });
-          } else {
-            // Reset when opening Create User
-            form.resetFields();
-          }
-        }
-      }, [visible, editingUser, form]);
-  
+const UserForm = ({ form, visible, onCancel, onSubmit, saving, editingUser }) => {
+
+  useEffect(() => {
+    if (visible) {
+      if (editingUser) {
+        form.setFieldsValue({
+          firstName: editingUser.first_name || "",
+          lastName: editingUser.last_name || "",
+          email: editingUser.email || "",
+          profileImage: editingUser.avatar || "",
+        });
+      } else {
+        form.resetFields();
+      }
+    }
+  }, [visible, editingUser, form]);
+
   const handleFinish = (values) => {
- 
     const userData = {
       first_name: values.firstName,
       last_name: values.lastName,
@@ -28,18 +27,14 @@ const UserForm = ({form,visible, onCancel,onSubmit,saving,editingUser }) => {
       avatar: values.profileImage,
     };
     if (editingUser && editingUser.id) {
-        userData.id = editingUser.id;
-      }
+      userData.id = editingUser.id;
+    }
     onSubmit(userData);
   };
 
   return (
     <Popups title={editingUser ? "Edit User" : "Create New User"} open={visible} onCancel={onCancel} width={500}>
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleFinish}
-      >
+      <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Form.Item
           label="First Name"
           name="firstName"
@@ -61,8 +56,7 @@ const UserForm = ({form,visible, onCancel,onSubmit,saving,editingUser }) => {
           name="email"
           rules={[
             { required: true, message: "Please enter email" },
-            { type: "email", message: "Please enter a valid email" },
-          ]}
+            { type: "email", message: "Please enter a valid email" },          ]}
         >
           <Input placeholder="Please enter email" />
         </Form.Item>
@@ -80,8 +74,8 @@ const UserForm = ({form,visible, onCancel,onSubmit,saving,editingUser }) => {
             Cancel
           </Button>
           <Button type="primary" htmlType="submit" loading={saving}>
-  {editingUser ? "Update" : "Submit"}
-</Button>
+            {editingUser ? "Update" : "Submit"}
+          </Button>
         </div>
       </Form>
     </Popups>

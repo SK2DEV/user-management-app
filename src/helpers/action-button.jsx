@@ -1,6 +1,10 @@
 import React from "react";
 import { Modal, Tooltip, Space, Button } from "antd";
-import { ExclamationCircleOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  ExclamationCircleOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 
 const { confirm } = Modal;
 
@@ -21,55 +25,45 @@ const ActionButtons = ({ record, onEdit, onDelete, mode }) => {
       key: "edit",
       icon: <EditOutlined />,
       label: "Edit",
-      color: "#1890ff",
+      danger: false,
       onClick: () => onEdit(record),
     },
     {
       key: "delete",
       icon: <DeleteOutlined />,
       label: "Delete",
-      color: "#ff4d4f",
-      onClick: showDeleteConfirm,
       danger: true,
+      onClick: showDeleteConfirm,
     },
   ];
 
+  const isCardMode = mode === "card";
+
   return (
     <Space>
-      {actions.map(({ key, icon, label, onClick, danger }) =>
-        mode === "card" ? (
-          <Tooltip title={label} key={key}>
-            <div
-              role="button"
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: "50%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                background: "#f0f0f0",
-                color: danger ? "#ff4d4f" : "#1890ff",
-                cursor: "pointer",
-                transition: "0.3s",
-              }}
-              onClick={onClick}
-            >
-              {icon}
-            </div>
-          </Tooltip>
-        ) : (
+      {actions.map(({ key, icon, label, onClick, danger }) => {
+        const button = (
           <Button
             key={key}
-            type="primary"
+            type= "primary"
             danger={danger}
-            // icon={icon}
+            shape={isCardMode ? "circle" : "default"}
+            icon={isCardMode ? icon : null}
             onClick={onClick}
+            size={isCardMode ? "large" : "middle"}
           >
-            {label}
+            {!isCardMode && label}
           </Button>
-        )
-      )}
+        );
+
+        return isCardMode ? (
+          <Tooltip title={label} key={key}>
+            {button}
+          </Tooltip>
+        ) : (
+          button
+        );
+      })}
     </Space>
   );
 };
