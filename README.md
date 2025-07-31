@@ -19,4 +19,6 @@ https://github.com/SK2DEV/user-management-app.git
 - This project uses a fake API (`https://reqres.in`) for login.
 - Since the API returns a token for **any** password, I implemented a custom password check in the frontend.
 - The correct credentials are:
+ "email": "eve.holt@reqres.in",
+ "password": "cityslicka"
 
